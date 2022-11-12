@@ -4,6 +4,8 @@ import asyncio
 
 from session_state import get
 from httpx_oauth.clients.google import GoogleOAuth2
+from httpx_oauth.clients.kakao import KakaoOAuth2
+from httpx_oauth.clients.naver import NaverOAuth2
 
 
 async def write_authorization_url(client,
@@ -34,11 +36,19 @@ def main(user_id, user_email):
 
 
 if __name__ == '__main__':
-    client_id = st.secrets['GOOGLE_CLIENT_ID']
-    client_secret = st.secrets['GOOGLE_CLIENT_SECRET']
-    redirect_uri = st.secrets['REDIRECT_URI']
+    svcSelected = st.selectbox("Select Service", ["Google", "Kakao", "Naver"])
 
-    client = GoogleOAuth2(client_id, client_secret)
+    redirect_uri = st.secrets['REDIRECT_URI']
+    if svcSelected == "Google":
+        client_id = st.secrets['GOOGLE_CLIENT_ID']
+        client_secret = st.secrets['GOOGLE_CLIENT_SECRET']
+        client = GoogleOAuth2(client_id, client_secret)
+    else:
+        client_id = st.secrets['KAKAO_CLIENT_ID']
+        client_secret = st.secrets['KAKAO_CLIENT_SECRET']
+        client = KakaoOAuth2(client_id, client_secret)
+
+
     authorization_url = asyncio.run(
         write_authorization_url(client=client,
                                 redirect_uri=redirect_uri)
