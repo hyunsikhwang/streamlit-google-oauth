@@ -1,2 +1,2 @@
-streamlit==0.81.1
-httpx-oauth
+streamlit==latest
+httpx-oauth==0.10.1
