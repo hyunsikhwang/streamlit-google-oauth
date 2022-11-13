@@ -5,7 +5,7 @@ import asyncio
 from session_state import get
 from httpx_oauth.clients.google import GoogleOAuth2
 from httpx_oauth.clients.kakao import KakaoOAuth2
-from httpx_oauth.clients.naver import NaverOAuth2
+# from httpx_oauth.clients.naver import NaverOAuth2
 
 
 async def write_authorization_url(client,
